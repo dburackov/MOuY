@@ -16,6 +16,8 @@ def get_base_matrix(a_matrix, b_base_plan):
 def simplex_method_main(c_vector, a_matrix, x_base_plan, b_base_plan, iter = 1, a_base_matrix_inv = []):
     if iter == 1:
         a_base_matrix_inv = np.linalg.inv(get_base_matrix(a_matrix, b_base_plan)) 
+        for curr in b_base_plan:
+            curr -= 1
     c_base_vector = []
     for i in b_base_plan:
         c_base_vector.append(c_vector[i])
@@ -43,6 +45,7 @@ def simplex_method_main(c_vector, a_matrix, x_base_plan, b_base_plan, iter = 1, 
     q0 = min(q_vector)
     if q0 == np.Infinity: 
         raise Exception('целевой функционал задачи не ограничен сверху на множестве допустимых планов')
+    
     k = q_vector.index(q0)
     j_k = b_base_plan[k]
     b_base_plan[k] = j0
@@ -65,7 +68,7 @@ if __name__ == '__main__':
     c = [1, 1, 0, 0, 0]
     x = [0, 0, 1, 3, 2]
     a = [[-1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 0, 0, 1]]
-    b = [2, 3, 4]
+    b = [3, 4, 5]
     print(simplex_method_main(c, a, x, b))
 
 
