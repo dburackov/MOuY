@@ -120,6 +120,13 @@ def simplex_method_init(c_vec, a_mtx, b_vec):
     return x_base_plan, b_init_plan, a_mtx, b_vec
 
 
+def simplex_method(c_vec, a_mtx, b_vec):
+    x_base_plan, b_base_plan, a_mtx, b_vec = simplex_method_init(c_vec, a_mtx, b_vec)
+    for i in range(len(b_base_plan)):
+            b_base_plan[i] += 1
+    return simplex_method_main(c_vec, a_mtx, x_base_plan, b_base_plan)
+
+
 def lab3():
     a = [[1, 1, 1], [2, 2, 2]]
     c = [1, 0, 0]
@@ -135,6 +142,13 @@ def lab3():
 
     print(simplex_method_init(c, a, b))
 
+    c = [1, 1, 0, 0, 0]
+    a = [[-1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 0, 0, 1]]
+    b = [1, 3, 2]
+
+    print(simplex_method(c, a, b))
+
+
 
 def lab2():
     c = [1, 1, 0, 0, 0]
@@ -142,13 +156,10 @@ def lab2():
     a = [[-1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 0, 0, 1]]
     b = [3, 4, 5]
     print(simplex_method_main(c, a, x, b))
-    print(x)
-    print(b)
 
 
 if __name__ == '__main__':
     lab3()
-    
 
 
 
